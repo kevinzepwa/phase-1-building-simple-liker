@@ -3,9 +3,15 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const errorModal = document.getElementById("modal")
+errorModal.className = "hidden"
 
-
-
+document.addEventListener("click", () => {
+  const likeList = document.querySelectorAll(".like-glyph");
+  for (let i = 0; i < likeList.length; i++) {
+    likeList[i].innerHTML = FULL_HEART;
+  }
+});
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
