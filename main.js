@@ -6,12 +6,28 @@ const FULL_HEART = '♥'
 const errorModal = document.getElementById("modal")
 errorModal.className = "hidden"
 
-document.addEventListener("click", () => {
-  const likeList = document.querySelectorAll(".like-glyph");
-  for (let i = 0; i < likeList.length; i++) {
-    likeList[i].innerHTML = FULL_HEART;
-  }
-});
+const likeState = {
+  EMPTY_HEART : FULL_HEART,
+  FULL_HEART : EMPTY_HEART
+}
+
+const heartList = document.querySelectorAll(".like-glyph");
+
+function likeCallback(e) {
+	const heart = e.target;
+	mimicServerCall() 
+		.then(function (serverMessage) {
+			heart.innerText = likeState[heart.innerText];
+			heart.innerHTML = FULL_HEART;
+		})
+		.catch(function (error) {
+			errorModal.className = "";
+		});
+}
+
+for (const singleHeart of heartList) {
+  singleHeart.addEventListener("click", likeCallback)
+};
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
@@ -29,3 +45,6 @@ function mimicServerCall(url="http://mimicServer.example.com", config={}) {
     }, 300);
   });
 }
+
+
+
