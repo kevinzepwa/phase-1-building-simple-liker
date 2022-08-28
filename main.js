@@ -16,11 +16,11 @@ const heartList = document.querySelectorAll(".like-glyph");
 function likeCallback(e) {
 	const heart = e.target;
 	mimicServerCall() 
-		.then(function (serverMessage) {
+		.then(function () {
 			heart.innerText = likeState[heart.innerText];
 			heart.innerHTML = FULL_HEART;
 		})
-		.catch(function (error) {
+		.catch(function () {
 			errorModal.className = "";
 		});
 }
